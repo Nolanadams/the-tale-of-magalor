@@ -1,3 +1,33 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (GameState == "SelectCharacterType") {
+        CharacterType = "Bad"
+        GameState = "Playing"
+        StartStage(1)
+    }
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (GameState == "SelectCharacterType") {
+        CharacterType = "Good"
+        GameState = "Playing"
+        StartStage(1)
+    }
+})
+function StartStage (StageNum: number) {
+    if (CharacterType == "Bad") {
+        mySprite = sprites.create(assets.image`Bad Magalor`, SpriteKind.Player)
+    } else {
+        mySprite2 = sprites.create(assets.image`Good magalor`, SpriteKind.Player)
+    }
+    controller.moveSprite(mySprite)
+    if (StageNum == 1) {
+    	
+    }
+}
+let mySprite2: Sprite = null
+let mySprite: Sprite = null
+let CharacterType = ""
+let GameState = ""
+GameState = "OpeningTitles"
 scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -121,6 +151,7 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     `)
 pause(4000)
+GameState = "OpeningStory"
 for (let index = 0; index <= 4; index++) {
     if (index == 0) {
         scene.setBackgroundImage(img`
@@ -741,6 +772,6 @@ for (let index = 0; index <= 4; index++) {
             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             `)
-        game.showLongText("Press A To Be Good Or Press B To Be Bad", DialogLayout.Bottom)
+        GameState = "SelectCharacterType"
     }
 }
