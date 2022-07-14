@@ -1,18 +1,59 @@
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (GameState == "SelectCharacterType") {
         CharacterType = "Bad"
-        GameState = "Playing"
         StartStage(1)
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (GameState == "SelectCharacterType") {
         CharacterType = "Good"
-        GameState = "Playing"
         StartStage(1)
+    } else if (GameState == "Playing") {
+        if (CharacterType == "Bad") {
+            projectile = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . 1 1 3 . . . . . . 
+                . . . . . . 1 3 . 3 3 . . . . . 
+                . . . . . . 1 . . . 3 2 2 3 . . 
+                . . . . . 1 3 . . . 2 2 1 3 3 . 
+                . . . . . 1 3 . 2 2 3 1 1 1 3 . 
+                . . 2 2 2 1 3 3 3 3 3 1 1 1 3 . 
+                . . 1 1 1 1 3 1 1 1 1 1 1 1 3 . 
+                . . 2 2 2 1 3 3 3 3 3 1 1 1 3 . 
+                . . . . . 1 3 . 2 2 3 1 1 1 3 . 
+                . . . . . 1 3 . . . 2 2 1 3 3 . 
+                . . . . . . 1 . . . 3 2 2 3 . . 
+                . . . . . . 1 3 . 3 3 . . . . . 
+                . . . . . . . 1 1 3 . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, mySprite, 100, 0)
+        } else {
+            projectile2 = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, mySprite, 50, 50)
+        }
+    } else {
+    	
     }
 })
 function StartStage (StageNum: number) {
+    GameState = "Playing"
     if (CharacterType == "Bad") {
         mySprite = sprites.create(assets.image`Bad Magalor`, SpriteKind.Player)
     } else {
@@ -20,11 +61,17 @@ function StartStage (StageNum: number) {
     }
     controller.moveSprite(mySprite)
     if (StageNum == 1) {
-    	
+        if (CharacterType == "Bad") {
+        	
+        } else {
+        	
+        }
     }
 }
 let mySprite2: Sprite = null
+let projectile2: Sprite = null
 let mySprite: Sprite = null
+let projectile: Sprite = null
 let CharacterType = ""
 let GameState = ""
 GameState = "OpeningTitles"
